@@ -23,15 +23,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -52,8 +43,18 @@ class MainPage extends StatelessWidget {
                         onTap: () {
                           Clipboard.setData(
                             ClipboardData(
-                              text: value,
+                              text: value.toString(),
                             ),
+                          ).then(
+                            (_) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    "Copied to clipboard",
+                                  ),
+                                ),
+                              );
+                            },
                           );
                         },
                         child: Text(
